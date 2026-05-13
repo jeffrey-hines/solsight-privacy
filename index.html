@@ -1,1 +1,236 @@
-# solsight-privacy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolSight Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #faf6ee;
+      --surface: #ffffff;
+      --foreground: #1f1f1b;
+      --foreground-muted: #5c5851;
+      --accent: #d9844f;
+      --divider: #e8dfd0;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--foreground);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+    header {
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 0.5px solid var(--divider);
+    }
+    h1 {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 500;
+      margin: 0 0 0.5rem 0;
+      color: var(--foreground);
+    }
+    h2 {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin: 2.5rem 0 0.75rem 0;
+      color: var(--foreground);
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.75rem 0 0.5rem 0;
+      color: var(--foreground);
+    }
+    p {
+      margin: 0 0 1rem 0;
+    }
+    ul {
+      margin: 0 0 1.25rem 0;
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.4rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 150ms ease;
+    }
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+    .meta {
+      color: var(--foreground-muted);
+      font-size: 0.95rem;
+    }
+    .lead {
+      font-size: 1.05rem;
+      color: var(--foreground);
+    }
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--divider);
+      color: var(--foreground-muted);
+      font-size: 0.9rem;
+    }
+    code {
+      background: var(--divider);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      font-size: 0.92em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>SolSight Privacy Policy</h1>
+      <p class="meta">Last updated: <!-- TODO: SET DATE BEFORE PUBLISHING --> May 11, 2026</p>
+    </header>
+
+    <p class="lead">
+      SolSight is a private health record application that runs entirely on your device. The way SolSight handles your data is different from most apps you've used — this policy describes what that looks like in detail.
+    </p>
+
+    <h2>What SolSight doesn't do</h2>
+
+    <p>
+      SolSight does <strong>not</strong> operate a server that stores your data. We do not run user accounts, databases of customer information, or analytics pipelines that collect what you do in the app. There is no "the cloud" in SolSight's architecture except for two specific cases described below.
+    </p>
+
+    <p>We do not collect, transmit, or store:</p>
+    <ul>
+      <li>Your health data (Apple Watch readings, lab results, clinical records, anything from HealthKit or Health Connect)</li>
+      <li>Your meal logs, events, or doctor profiles</li>
+      <li>Your usage patterns inside the app (no analytics)</li>
+      <li>Crash reports with personally identifying information (basic crash reports may be enabled via Apple's standard tooling; these do not contain health data)</li>
+      <li>Identifying information about you beyond what your device's operating system already shares with the App Store</li>
+    </ul>
+
+    <h2>Where your data actually lives</h2>
+
+    <p>
+      All your health data, briefings, profile, meals, events, and other information is stored locally on your device, in an encrypted SQLite database protected by AES-256 encryption. The encryption key is held in your device's secure enclave (iOS Keychain on iOS, Android Keystore on Android) and is unlocked only by your biometric (Face ID, Touch ID, or device passcode).
+    </p>
+
+    <h2>When data leaves your device</h2>
+
+    <p>There are exactly two paths by which information may leave your device:</p>
+
+    <h3>1. AI processing via Anthropic's Claude API</h3>
+
+    <p>
+      When you share a document (lab result screenshot, visit summary PDF, etc.) to SolSight, the image bytes are sent to Anthropic's Claude API for extraction. The same happens when SolSight generates your daily, weekly, or monthly briefing — the digest of your data is sent to Claude to produce the briefing text.
+    </p>
+
+    <p>
+      This processing happens under <strong>your</strong> Anthropic API key, which you provide. SolSight does not operate a Claude account; we never see or proxy your requests. Anthropic's privacy policy governs the processing of these requests — see <a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>.
+    </p>
+
+    <p>
+      Anthropic states it does not train its models on data processed through its API by default. Refer to Anthropic's terms for specifics.
+    </p>
+
+    <p>
+      If you do not enter an Anthropic API key, no AI features work, and no data is sent to Anthropic. The non-AI features of SolSight (viewing your existing data, manual meal logging, etc.) continue to work locally.
+    </p>
+
+    <h3>2. Cross-device sync via your own cloud account</h3>
+
+    <p>
+      <em>Note: this feature is not yet enabled in the current version. The following description is provided for forward-compatibility transparency.</em>
+    </p>
+
+    <p>
+      When you enable cross-device sync, your encrypted data is stored in <strong>your</strong> iCloud Drive or Google Drive folder. The data is encrypted on your device before it's written to your cloud — neither Apple nor Google can read its contents. The encryption key for sync is derived from a passphrase you set; we do not have access to that passphrase.
+    </p>
+
+    <p>
+      If you don't enable sync, no data leaves your device for sync purposes.
+    </p>
+
+    <h2>Third-party services we don't run but you use</h2>
+
+    <p>SolSight reads from and writes to several services operated by others:</p>
+    <ul>
+      <li><strong>Apple Health (HealthKit)</strong> — when you grant permission, SolSight reads your existing health data via Apple's framework. Apple's privacy policy governs HealthKit.</li>
+      <li><strong>Google Health Connect</strong> — analogous on Android.</li>
+      <li><strong>Anthropic Claude API</strong> — see the AI processing section above.</li>
+      <li><strong>iCloud Drive / Google Drive</strong> — only if you enable sync (forthcoming).</li>
+    </ul>
+    <p>
+      We don't have access to your accounts with these services — you authorize SolSight via your device's standard mechanisms.
+    </p>
+
+    <h2>Children</h2>
+
+    <p>
+      SolSight is not directed at children under 13. We do not knowingly collect personal data from children. If you believe a child has provided information through SolSight, please contact us at the address below.
+    </p>
+
+    <h2>Your rights</h2>
+
+    <p>
+      Because SolSight does not have a database of your information, "data subject rights" requests (delete my data, export my data, etc.) are different than they would be from a server-side service:
+    </p>
+    <ul>
+      <li><strong>Delete all your data:</strong> Settings → Wipe local data (or simply uninstall the app)</li>
+      <li><strong>Export your data:</strong> Forthcoming — a future version will add a documented export format</li>
+      <li><strong>Stop AI processing:</strong> remove your Anthropic API key from Settings → AI</li>
+      <li><strong>Stop sync:</strong> disconnect from sync in Settings → Sync, or uninstall the app</li>
+    </ul>
+    <p>
+      If you have data that's accumulated on Anthropic's servers from your use of SolSight (logs of API requests, etc.), contact Anthropic directly to exercise rights with respect to those requests.
+    </p>
+
+    <h2>Security</h2>
+
+    <p>
+      SolSight's database is encrypted at rest using AES-256-GCM with a 256-bit key. The key never leaves your device. The app requires biometric authentication (Face ID, Touch ID, or device passcode) on every launch and after periods of background inactivity.
+    </p>
+
+    <p>
+      We follow security best practices in code that handles encryption keys — keys never appear in logs, error messages, or crash reports.
+    </p>
+
+    <h2>Changes to this policy</h2>
+
+    <p>
+      If we update this policy, we'll post the new version here and update the "Last updated" date at the top. Material changes will be surfaced in the app the next time you launch.
+    </p>
+
+    <h2>Contact</h2>
+
+    <p>
+      Questions about this policy or about SolSight's privacy practices:
+    </p>
+    <p>
+      <!-- TODO: REPLACE WITH YOUR CONTACT EMAIL BEFORE PUBLISHING -->
+      <a href="mailto:hello@solsight.health">hello@solsight.health</a>
+    </p>
+
+    <footer>
+      <!-- TODO: REPLACE WITH YOUR NAME / ENTITY AS APPROPRIATE FOR YOUR JURISDICTION -->
+      <p>SolSight</p>
+    </footer>
+  </main>
+</body>
+</html>
